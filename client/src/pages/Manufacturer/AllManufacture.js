@@ -19,22 +19,25 @@ export default function AllManufacture(props) {
   const [count, setCount] = React.useState(0);
   const [allManufacture, setAllManufacture] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [open, setOpen] = React.useState(false);
+  const [modalData, setModalData] = React.useState([]);
+
   const navItem = [
     ["Add Product", "/manufacturer/manufacture"],
     ["Ship Product", "/manufacturer/ship"],
     ["All Products", "/manufacturer/allManufacture"],
   ];
-  React.useEffect(() => {
-    setLoading(true);
-    (async () => {
+
+  const fetchProducts = async () => {
+    try {
       setLoading(true);
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
       setCount(cnt);
-    })();
 
-    (async () => {
       const arr = [];
-      for (var i = 1; i < count; i++) {
+      for (var i = 1; i < cnt; i++) {
         const prodState = await supplyChainContract.methods
           .fetchProductState(i)
           .call();
@@ -57,12 +60,18 @@ export default function AllManufacture(props) {
         }
       }
       setAllManufacture(arr);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
       setLoading(false);
-    })();
-  }, [count]);
+    }
+  };
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  React.useEffect(() => {
+    if (supplyChainContract) {
+      fetchProducts();
+    }
+  }, [supplyChainContract]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -73,19 +82,16 @@ export default function AllManufacture(props) {
     setPage(0);
   };
 
-  const [open, setOpen] = React.useState(false);
-  const [modalData, setModalData] = React.useState([]);
-
   const handleClose = () => setOpen(false);
 
   const handleClick = async (prod) => {
-    await setModalData(prod);
+    setModalData(prod);
     setOpen(true);
   };
 
   return (
-    <div classname={classes.pageWrap}>
-      <Navbar pageTitle={"Manufacturer"} navItems={navItem}>
+    <div className={classes.pageWrap}>
+      <Navbar pageTitle="Manufacturer" navItems={navItem}>
         {loading ? (
           <Loader />
         ) : (
@@ -97,7 +103,7 @@ export default function AllManufacture(props) {
             />
             <h1 className={classes.pageHeading}>Manufactured Products</h1>
             <h3 className={classes.tableCount}>
-              Total : {allManufacture.length}
+              Total: {allManufacture.length}
             </h3>
             <>
               <div>

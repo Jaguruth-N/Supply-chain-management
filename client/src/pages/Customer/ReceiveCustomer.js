@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import ProductModal from "../../components/Modal";
@@ -16,80 +16,73 @@ import clsx from "clsx";
 import Loader from "../../components/Loader";
 
 export default function ReceiveCustomer(props) {
-  const supplyChainContract = props.supplyChainContract;
+  const { supplyChainContract } = props;
   const { roles } = useRole();
-  const [count, setCount] = React.useState(0);
-  const [allReceiveProducts, setAllReceiveProducts] = React.useState([]);
+  const [count, setCount] = useState(0);
+  const [allReceiveProducts, setAllReceiveProducts] = useState([]);
   const [modalData, setModalData] = useState([]);
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const navItem = [
     ["Purchase Product", "/Customer/buy"],
     ["Receive Product", "/Customer/receive"],
     ["Your Products", "/Customer/allReceived"],
   ];
-  const [alertText, setalertText] = React.useState("");
-  React.useEffect(() => {
-    (async () => {
-      setLoading(true);
+  const [alertText, setAlertText] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, [supplyChainContract]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
       setCount(cnt);
-    })();
-
-    (async () => {
       const arr = [];
-      for (var i = 1; i < count; i++) {
-        const prodState = await supplyChainContract.methods
-          .fetchProductState(i)
-          .call();
-
+      for (let i = 1; i < cnt; i++) {
+        const prodState = await supplyChainContract.methods.fetchProductState(i).call();
         if (prodState === "7") {
           const prodData = [];
-          const a = await supplyChainContract.methods
-            .fetchProductPart1(i, "product", 0)
-            .call();
-          const b = await supplyChainContract.methods
-            .fetchProductPart2(i, "product", 0)
-            .call();
-          const c = await supplyChainContract.methods
-            .fetchProductPart3(i, "product", 0)
-            .call();
-          prodData.push(a);
-          prodData.push(b);
-          prodData.push(c);
+          const a = await supplyChainContract.methods.fetchProductPart1(i, "product", 0).call();
+          const b = await supplyChainContract.methods.fetchProductPart2(i, "product", 0).call();
+          const c = await supplyChainContract.methods.fetchProductPart3(i, "product", 0).call();
+          prodData.push(a, b, c);
           arr.push(prodData);
         }
       }
       setAllReceiveProducts(arr);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+      setAlertText("Error fetching products. Please try again.");
+    } finally {
       setLoading(false);
-    })();
-  }, [count]);
+    }
+  };
 
   const handleReceiveButton = async (id) => {
-    try{
-      await supplyChainContract.methods
-      .receiveByCustomer(parseInt(id))
-      .send({ from: roles.customer, gas: 1000000 })
-      .on("transactionHash", function (hash) {
-        handleSetTxhash(id, hash);
-      });
-    setCount(0);
-    setOpen(false);
-    }catch{
-      setalertText("You are not the owner of the Product");
+    try {
+      await supplyChainContract.methods.receiveByCustomer(parseInt(id)).send({ from: roles.customer, gas: 1000000 })
+        .on("transactionHash", function (hash) {
+          handleSetTxhash(id, hash);
+        });
+      setOpen(false);
+      setAlertText(""); // Clear alert text on success
+      // Re-fetch the products after receiving
+      fetchData();
+    } catch (error) {
+      console.error(error);
+      setAlertText("You are not the owner of the Product");
     }
-    
   };
 
   const handleSetTxhash = async (id, hash) => {
-    await supplyChainContract.methods
-      .setTransactionHash(id, hash)
-      .send({ from: roles.manufacturer, gas: 900000 });
+    await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas: 900000 });
   };
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -103,12 +96,12 @@ export default function ReceiveCustomer(props) {
   const handleClose = () => setOpen(false);
 
   const handleClick = async (prod) => {
-    await setModalData(prod);
+    setModalData(prod);
     setOpen(true);
   };
 
   return (
-    <div classname={classes.pageWrap}>
+    <div className={classes.pageWrap}>
       <Navbar pageTitle={"Customer"} navItems={navItem}>
         {loading ? (
           <Loader />
@@ -124,8 +117,12 @@ export default function ReceiveCustomer(props) {
 
             <h1 className={classes.pageHeading}>Products to be Received</h1>
             <h3 className={classes.tableCount}>
-              Total : {allReceiveProducts.length}
+              Total: {allReceiveProducts.length}
             </h3>
+
+            {alertText && (
+              <p><b style={{ color: "red" }}>{alertText}</b></p>
+            )}
 
             <div>
               <Paper className={classes.TableRoot}>
@@ -133,120 +130,58 @@ export default function ReceiveCustomer(props) {
                   <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                       <TableRow>
-                        <TableCell className={classes.TableHead} align="left">
-                          Universal ID
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Product Code
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Manufacturer
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Manufacture Date
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Product Name
-                        </TableCell>
-                        <TableCell
-                          className={clsx(
-                            classes.TableHead,
-                            classes.AddressCell
-                          )}
-                          align="center"
-                        >
-                          Owner
-                        </TableCell>
-                        <TableCell
-                          className={clsx(classes.TableHead)}
-                          align="center"
-                        >
-                          RECEIVE
-                        </TableCell>
+                        <TableCell className={classes.TableHead} align="left">Universal ID</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Product Code</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Manufacturer</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Manufacture Date</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Product Name</TableCell>
+                        <TableCell className={clsx(classes.TableHead, classes.AddressCell)} align="center">Owner</TableCell>
+                        <TableCell className={clsx(classes.TableHead)} align="center">RECEIVE</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {allReceiveProducts.length !== 0 ? (
                         allReceiveProducts
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
+                          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                           .map((prod) => {
                             const d = new Date(parseInt(prod[1][0] * 1000));
                             return (
-                              <>
-                                <TableRow
-                                  hover
-                                  role="checkbox"
-                                  tabIndex={-1}
-                                  key={prod[0][0]}
-                                >
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    component="th"
-                                    align="left"
-                                    scope="row"
-                                    onClick={() => handleClick(prod)}
+                              <TableRow hover role="checkbox" tabIndex={-1} key={prod[0][0]}>
+                                <TableCell className={classes.TableCell} component="th" align="left" scope="row" onClick={() => handleClick(prod)}>
+                                  {prod[0][0]}
+                                </TableCell>
+                                <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(prod)}>
+                                  {prod[1][2]}
+                                </TableCell>
+                                <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(prod)}>
+                                  {prod[0][4]}
+                                </TableCell>
+                                <TableCell align="center" onClick={() => handleClick(prod)}>
+                                  {d.toDateString() + " " + d.toTimeString()}
+                                </TableCell>
+                                <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(prod)}>
+                                  {prod[1][1]}
+                                </TableCell>
+                                <TableCell className={clsx(classes.TableCell, classes.AddressCell)} align="center" onClick={() => handleClick(prod)}>
+                                  {prod[0][2]}
+                                </TableCell>
+                                <TableCell className={clsx(classes.TableCell)} align="center">
+                                  <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => handleReceiveButton(prod[0][0])}
                                   >
-                                    {prod[0][0]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[1][2]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[0][4]}
-                                  </TableCell>
-                                  <TableCell
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {d.toDateString() + " " + d.toTimeString()}
-                                  </TableCell>
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[1][1]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={clsx(
-                                      classes.TableCell,
-                                      classes.AddressCell
-                                    )}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[0][2]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={clsx(classes.TableCell)}
-                                    align="center"
-                                  >
-                                    <Button
-                                      type="submit"
-                                      variant="contained"
-                                      color="primary"
-                                      onClick={() => handleClick(prod)}
-                                    >
-                                      RECEIVE
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              </>
+                                    RECEIVE
+                                  </Button>
+                                </TableCell>
+                              </TableRow>
                             );
                           })
                       ) : (
-                        <> </>
+                        <TableRow>
+                          <TableCell colSpan={7} align="center">No products available</TableCell>
+                        </TableRow>
                       )}
                     </TableBody>
                   </Table>
@@ -262,32 +197,6 @@ export default function ReceiveCustomer(props) {
                 />
               </Paper>
             </div>
-
-            {/* {allReceiveProducts.length !== 0 ? (allReceiveProducts.map((prod) => (
-                <>
-                    <div>
-                    <p>Universal ID : {prod[0][0]}</p>
-                    <p>SKU : {prod[0][1]}</p>
-                    <p>Owner : {prod[0][2]}</p>
-                    <p>Manufacturer : {prod[0][3]}</p>
-                    <p>Name of Manufacturer : {prod[0][4]}</p>
-                    <p>Details of Manufacturer : {prod[0][5]}</p>
-                    <p>Longitude of Manufature : {prod[0][6]}</p>
-                    <p>Latitude of Manufature : {prod[0][7]}</p>
-
-                    <p>Manufactured date : {prod[1][0]}</p>
-                    <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={() => handleClick(prod)}
-            >
-                Recieve
-            </Button>
-                    </div>
-                    
-                </>
-          ))) : <> </>} */}
           </>
         )}
       </Navbar>

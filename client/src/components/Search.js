@@ -8,52 +8,67 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: '2px 10px',
     display: 'flex',
-    margin:'20px auto',
+    margin: '20px auto',
     width: '40%',
-    border:"2px solid #1a237e",
-    borderRadius:50,
-    boxShadow:"2px 2px 10px #9fa8da"
-
+    border: "2px solid #1a237e",
+    borderRadius: 50,
+    boxShadow: "2px 2px 10px #9fa8da"
   },
   input: {
-    justifyContent:'center',
+    justifyContent: 'center',
     flex: 1,
-    outline:"none",
-    border:"none",
-    padding:0,
-    borderRadius:40,
+    outline: "none",
+    border: "none",
+    padding: 0,
+    borderRadius: 40,
     fontSize: 17
   },
   iconButton: {
     padding: 10,
   },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
 }));
 
 export default function CustomizedInputBase(props) {
   const classes = useStyles();
-  const [search , setSearch] = React.useState("");
-  const onTextChage = async (e) =>{
+  const [search, setSearch] = React.useState("");
+
+  const handleChange = (e) => {
     setSearch(e.target.value);
-  }
-  
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
+  };
+
+  const performSearch = () => {
+    if (search.trim()) {
+      props.findProduct(search);
+      setSearch(""); // Clear the input after search
+    } else {
+      alert("Please enter a valid Universal ID."); // Basic error handling
+    }
+  };
+
   return (
-    <>
-    <Paper  className={classes.root}>
+    <Paper className={classes.root}>
       <input
         className={classes.input}
         placeholder="Enter Product Universal ID"
         inputProps={{ 'aria-label': 'Enter Product Universal ID' }}
-        onChange = {onTextChage}
-        onKeyPress = {(e) => e.key === 'Enter'  ? props.findProduct(search): onTextChage}
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+        value={search}
+        type="number" // Set input type to number
       />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={() => props.findProduct(search)}>
+      <IconButton 
+        className={classes.iconButton} 
+        aria-label="search" 
+        onClick={performSearch} // Use the performSearch function
+      >
         <SearchIcon />
       </IconButton>
     </Paper>
-    </>
   );
 }

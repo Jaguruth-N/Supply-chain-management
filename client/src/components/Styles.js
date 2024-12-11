@@ -1,9 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
   pageWrap: {
-    textAlign: "center",
-    color: "#1a237e",
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    padding: theme.spacing(3),
+  },
+  paper: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
   },
   pageHeading: {
     textAlign: "center",
@@ -95,20 +102,9 @@ export const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
   },
-  paper: {
-    backgroundColor: "#fff",
-    padding: 15,
-    outline: "none",
-    width: "min(90%, 650px)",
-    height: "80%",
-    border: "2px solid #1a237e",
-    borderRadius: 10,
-    boxShadow: "2px 2px 10px #9fa8da",
-    overflow: "scroll",
-  },
   Reciptpaper: {
     backgroundColor: "#fff",
-    border: "0px solid #000",
+    // border: "0px solid #000",
     padding: 15,
     outline: "none",
     width: "min(95%, 950px)",
@@ -156,4 +152,4 @@ export const useStyles = makeStyles({
     border: "2px solid #1a237e",
     margin: "10px auto",
   },
-});
+}));

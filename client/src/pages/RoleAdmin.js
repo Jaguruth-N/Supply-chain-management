@@ -122,7 +122,7 @@ function RoleAdmin(props) {
             onClick={handleAddThirdPartyRole}
             style={{width:"30%", marginLeft:"10px"}}
           >
-            Add third party
+            Add Third Party
           </Button>
         </div>
       </form>
@@ -143,7 +143,7 @@ function RoleAdmin(props) {
             onClick={handleAddDeliveryHubRole}
             style={{width:"30%", marginLeft:"10px"}}
           >
-            add delivery hub
+            Add Delivery Hub
           </Button>
         </div>
       </form>
@@ -164,7 +164,7 @@ function RoleAdmin(props) {
             onClick={handleAddCustomerRole}
             style={{width:"30%", marginLeft:"10px"}}
           >
-            add customer
+            Add Customer
           </Button>
         </div>
       </form>

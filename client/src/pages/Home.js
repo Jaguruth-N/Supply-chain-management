@@ -33,8 +33,8 @@ export default function Home() {
             >
               <img
                 alt="."
-                src="/homeArt.png"
-                style={{ width: "90%", height: "auto" }}
+                src="/homeArt4.png"
+                style={{ width: "80%", height: "auto" }}
               />
             </Grid>
 
@@ -63,6 +63,7 @@ export default function Home() {
                     size="large"
                     variant="outlined"
                     color="primary"
+                    style={{ fontSize: "15px" }}
                   >
                     Assign
                   </Button>
@@ -79,6 +80,7 @@ export default function Home() {
                     size="large"
                     variant="outlined"
                     color="primary"
+                    style={{ fontSize: "15px" }}
                   >
                     Manufacturer
                   </Button>
@@ -92,8 +94,9 @@ export default function Home() {
                     size="large"
                     variant="outlined"
                     color="primary"
+                    style={{ fontSize: "15px" }}
                   >
-                    Third party
+                    Third Party
                   </Button>
                 </Link>
                 <Link
@@ -105,8 +108,9 @@ export default function Home() {
                     size="large"
                     variant="outlined"
                     color="primary"
+                    style={{ fontSize: "15px" }}
                   >
-                    delivery hub
+                    Delivery Hub
                   </Button>
                 </Link>
                 <Link
@@ -118,8 +122,9 @@ export default function Home() {
                     size="large"
                     variant="outlined"
                     color="primary"
+                    style={{ fontSize: "15px" }}
                   >
-                    customer
+                    Customer
                   </Button>
                 </Link>
               </div>

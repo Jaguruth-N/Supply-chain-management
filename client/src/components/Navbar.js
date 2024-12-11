@@ -14,7 +14,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
-import GitHubIcon from "@material-ui/icons/GitHub";
 
 const drawerWidth = 240;
 
@@ -110,16 +109,16 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ display: "flex", alignItems: "center" ,fontFamily:"Work Sans, sans-serif;sans-serif",fontSize: "25px"}}
           >
             <img
               alt="."
-              src="/logo.png"
-              style={{ height: "45px", width: "auto" }}
+              src="/logo3.png"
+              style={{ height: "60px", width: "auto" }}
             />
-            &nbsp;SupplyChain-Dapp
+            &nbsp;My DAAP
           </Typography>
         </Toolbar>
       </AppBar>
@@ -133,27 +132,32 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
         }}
       >
         <div className={classes.drawerHeader}>
-        <ListItemText><b>{pageTitle}</b></ListItemText>
+        <ListItemText primaryTypographyProps={{ style: { fontSize: "24px" , fontFamily:"Public Sans, sans-serif"} }}>{pageTitle}</ListItemText>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
-              <ChevronLeftIcon style={{ color: "#fff" }} />
+              <ChevronLeftIcon style={{ color: "#fff",fontSize:"27px" }} />
             ) : (
-              <ChevronRightIcon />
+              <ChevronRightIcon style={{fontSize:"27px"}} />
             )}
           </IconButton>
         </div>
         <List>
-          <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+          <Link 
+            key="home"
+            to="/"
+            style={{ textDecoration: "none", color: "#fff" }}
+          >
             <ListItem>
-              <ListItemText>Home</ListItemText>
+              <ListItemText primaryTypographyProps={{ style: { fontSize: "20px" , fontFamily:"Work Sans, sans-serif"} }}>Home</ListItemText>
             </ListItem>
           </Link>
           <Link
+            key="explorer"
             to="/explorer"
             style={{ textDecoration: "none", color: "#fff" }}
           >
             <ListItem>
-              <ListItemText>Explorer</ListItemText>
+              <ListItemText primaryTypographyProps={{ style: { fontSize: "20px",fontFamily:"Work Sans, sans-serif;sans-serif" } }}>Explorer</ListItemText>
             </ListItem>
           </Link>
         </List>
@@ -161,11 +165,12 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
           {navItems.length !== 0 ? (
             navItems.map((item) => (
               <Link
+                key={item[0]}
                 to={item[1]}
-                style={{ textDecoration: "none", color: "#fff" }}
+                style={{ textDecoration: "none", color: "#fff",fontSize:"18px" }}
               >
-                <ListItem button key={item[0]}>
-                  <ListItemText primary={item[0]} />
+                <ListItem button>
+                  <ListItemText primary={item[0]} primaryTypographyProps={{ style: { fontSize: "16px",fontFamily:"Work Sans, sans-serif;sans-serif" }}} />
                 </ListItem>
               </Link>
             ))
@@ -174,28 +179,9 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
           )}
         </List>
         <div
-          style={{ height: "100%", display: "flex", alignItems: "flex-end" }}
+          style={{ height: "100%", display: "flex", alignItems: "flex-end",fontSize: "60px" }}
         >
-          <div
-            style={{
-              width: "100%",
-              height: "70px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: 500,
-              fontSize: 17,
-              borderTop: "1px solid #44a",
-            }}
-          >
-            By Team Akatsuki &nbsp;&nbsp;
-            <a
-              style={{ textDecoration: "none" }}
-              href="https://github.com/rishav4101/eth-supplychain-dapp"
-            >
-              <GitHubIcon style={{ color: "#fff" }} />
-            </a>
-          </div>
+          
         </div>
       </Drawer>
       <main
@@ -204,7 +190,7 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <div style={{ margin: "0 auto", maxWidth: 1300 }}>{children}</div>
+        <div style={{ margin: "0 auto", maxWidth: 1300, fontSize:"15px" }}>{children}</div>
       </main>
     </div>
   );

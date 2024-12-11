@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import ProductModal from "../../components/Modal";
@@ -16,72 +16,69 @@ import clsx from "clsx";
 import Loader from "../../components/Loader";
 
 export default function ReceiveThirdParty(props) {
-  const supplyChainContract = props.supplyChainContract;
+  const { supplyChainContract } = props;
   const { roles } = useRole();
-  const [count, setCount] = React.useState(0);
-  const [allReceiveProducts, setAllReceiveProducts] = React.useState([]);
+  const [allReceiveProducts, setAllReceiveProducts] = useState([]);
   const [modalData, setModalData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const [alertText, setAlertText] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const classes = useStyles();
-  const [alertText, setalertText] = React.useState("");
+
   const navItem = [
     ["Buy Product", "/ThirdParty/allProducts"],
     ["Receive Product", "/ThirdParty/receive"],
     ["Ship Products", "/ThirdParty/ship"],
   ];
-  React.useEffect(() => {
-    (async () => {
-      setLoading(true);
+
+  useEffect(() => {
+    fetchData();
+  }, [supplyChainContract]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
-      setCount(cnt);
-     
-    })();
-
-    (async () => {
       const arr = [];
-      for (var i = 1; i < count; i++) {
-        const prodState = await supplyChainContract.methods
-          .fetchProductState(i)
-          .call();
-
+      for (let i = 1; i < cnt; i++) {
+        const prodState = await supplyChainContract.methods.fetchProductState(i).call();
         if (prodState === "2") {
-          const prodData = [];
-          const a = await supplyChainContract.methods
-            .fetchProductPart1(i, "product", 0)
-            .call();
-          const b = await supplyChainContract.methods
-            .fetchProductPart2(i, "product", 0)
-            .call();
-          const c = await supplyChainContract.methods
-            .fetchProductPart3(i, "product", 0)
-            .call();
-          prodData.push(a);
-          prodData.push(b);
-          prodData.push(c);
-          arr.push(prodData);
+          const [a, b, c] = await Promise.all([
+            supplyChainContract.methods.fetchProductPart1(i, "product", 0).call(),
+            supplyChainContract.methods.fetchProductPart2(i, "product", 0).call(),
+            supplyChainContract.methods.fetchProductPart3(i, "product", 0).call()
+          ]);
+          arr.push([a, b, c]);
         }
       }
       setAllReceiveProducts(arr);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setAlertText("Error fetching products. Please try again.");
+    } finally {
       setLoading(false);
-    })();
-  }, [count]);
+    }
+  };
 
   const handleReceiveButton = async (id, long, lat) => {
-    try{
+    try {
       await supplyChainContract.methods
-      .receiveByThirdParty(parseInt(id), long, lat)
-      .send({ from: roles.thirdparty, gas: 1000000 })
-      .on("transactionHash", function (hash) {
-        handleSetTxhash(id, hash);
-      });
-    
-    setCount(0);
-    setOpen(false);
-    }catch{
-      setalertText("You are not the owner of the product");
+        .receiveByThirdParty(parseInt(id), long, lat)
+        .send({ from: roles.thirdparty, gas: 1000000 })
+        .on("transactionHash", function (hash) {
+          handleSetTxhash(id, hash);
+        });
+      setOpen(false);
+      setAlertText(""); // Clear alert text on success
+      // Re-fetch the products after receiving
+      fetchData();
+    } catch (error) {
+      console.error(error);
+      setAlertText("You are not the owner of the product");
     }
-    
   };
 
   const handleSetTxhash = async (id, hash) => {
@@ -90,45 +87,87 @@ export default function ReceiveThirdParty(props) {
       .send({ from: roles.manufacturer, gas: 900000 });
   };
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
+  const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   const handleClose = () => setOpen(false);
 
-  const handleClick = async (prod) => {
-    await setModalData(prod);
-    
+  const handleClick = (prod) => {
+    setModalData(prod);
     setOpen(true);
   };
 
+  const renderTableBody = () => {
+    if (allReceiveProducts.length === 0) {
+      return (
+        <TableRow>
+          <TableCell colSpan={7} align="center">
+            No products to receive
+          </TableCell>
+        </TableRow>
+      );
+    }
+
+    return allReceiveProducts
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map((prod) => (
+        <TableRow hover role="checkbox" tabIndex={-1} key={prod[0][0]}>
+          <TableCell className={classes.TableCell} component="th" align="left" scope="row" onClick={() => handleClick(prod)}>
+            {prod[0][0]}
+          </TableCell>
+          <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(prod)}>
+            {prod[1][2]}
+          </TableCell>
+          <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(prod)}>
+            {prod[0][4]}
+          </TableCell>
+          <TableCell align="center" onClick={() => handleClick(prod)}>
+            {new Date(parseInt(prod[1][0] * 1000)).toDateString() + " " + new Date(parseInt(prod[1][0] * 1000)).toTimeString()}
+          </TableCell>
+          <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(prod)}>
+            {prod[1][1]}
+          </TableCell>
+          <TableCell className={clsx(classes.TableCell, classes.AddressCell)} align="center" onClick={() => handleClick(prod)}>
+            {prod[0][2]}
+          </TableCell>
+          <TableCell className={clsx(classes.TableCell)} align="center">
+            <Button type="submit" variant="contained" color="primary" onClick={() => handleReceiveButton(prod[0][0], prod[0][3], prod[0][4])}>
+              RECEIVE
+            </Button>
+          </TableCell>
+        </TableRow>
+      ));
+  };
+
   return (
-    <div classname={classes.pageWrap}>
-      <Navbar pageTitle={"Third Party"} navItems={navItem}>
+    <div className={classes.pageWrap}>
+      <Navbar pageTitle="Third Party" navItems={navItem}>
         {loading ? (
           <Loader />
         ) : (
-          <>
+          <div>
             <ProductModal
               prod={modalData}
               open={open}
               handleClose={handleClose}
               handleReceiveButton={handleReceiveButton}
-              aText = {alertText}
+              aText={alertText}
             />
 
             <h1 className={classes.pageHeading}>Products to be Received</h1>
             <h3 className={classes.tableCount}>
-              Total : {allReceiveProducts.length}
+              Total: {allReceiveProducts.length}
             </h3>
+
+            {alertText && (
+              <p><b style={{ color: "red" }}>{alertText}</b></p>
+            )}
 
             <div>
               <Paper className={classes.TableRoot}>
@@ -136,121 +175,17 @@ export default function ReceiveThirdParty(props) {
                   <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                       <TableRow>
-                        <TableCell className={classes.TableHead} align="left">
-                          Universal ID
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Product Code
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Manufacturer
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Manufacture Date
-                        </TableCell>
-                        <TableCell className={classes.TableHead} align="center">
-                          Product Name
-                        </TableCell>
-                        <TableCell
-                          className={clsx(
-                            classes.TableHead,
-                            classes.AddressCell
-                          )}
-                          align="center"
-                        >
-                          Owner
-                        </TableCell>
-                        <TableCell
-                          className={clsx(classes.TableHead)}
-                          align="center"
-                        >
-                          RECEIVE
-                        </TableCell>
+                        <TableCell className={classes.TableHead} align="left">Universal ID</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Product Code</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Manufacturer</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Manufacture Date</TableCell>
+                        <TableCell className={classes.TableHead} align="center">Product Name</TableCell>
+                        <TableCell className={clsx(classes.TableHead, classes.AddressCell)} align="center">Owner</TableCell>
+                        <TableCell className={clsx(classes.TableHead)} align="center">RECEIVE</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {allReceiveProducts.length !== 0 ? (
-                        allReceiveProducts
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
-                          .map((prod) => {
-                            const d = new Date(parseInt(prod[1][0] * 1000));
-                            return (
-                              <>
-                                <TableRow
-                                  hover
-                                  role="checkbox"
-                                  tabIndex={-1}
-                                  key={prod[0][0]}
-                                >
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    component="th"
-                                    align="left"
-                                    scope="row"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[0][0]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[1][2]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[0][4]}
-                                  </TableCell>
-                                  <TableCell
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {d.toDateString() + " " + d.toTimeString()}
-                                  </TableCell>
-                                  <TableCell
-                                    className={classes.TableCell}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[1][1]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={clsx(
-                                      classes.TableCell,
-                                      classes.AddressCell
-                                    )}
-                                    align="center"
-                                    onClick={() => handleClick(prod)}
-                                  >
-                                    {prod[0][2]}
-                                  </TableCell>
-                                  <TableCell
-                                    className={clsx(classes.TableCell)}
-                                    align="center"
-                                  >
-                                    <Button
-                                      type="submit"
-                                      variant="contained"
-                                      color="primary"
-                                      onClick={() => handleClick(prod)}
-                                    >
-                                      RECEIVE
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              </>
-                            );
-                          })
-                      ) : (
-                        <> </>
-                      )}
+                      {renderTableBody()}
                     </TableBody>
                   </Table>
                 </TableContainer>
@@ -260,38 +195,12 @@ export default function ReceiveThirdParty(props) {
                   count={allReceiveProducts.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
-                  onChangePage={handleChangePage}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  onPageChange={handlePageChange}
+                  onRowsPerPageChange={handleRowsPerPageChange}
                 />
               </Paper>
             </div>
-
-            {/* {allReceiveProducts.length !== 0 ? (allReceiveProducts.map((prod) => (
-                <>
-                    <div>
-                    <p>Universal ID : {prod[0][0]}</p>
-                    <p>SKU : {prod[0][1]}</p>
-                    <p>Owner : {prod[0][2]}</p>
-                    <p>Manufacturer : {prod[0][3]}</p>
-                    <p>Name of Manufacturer : {prod[0][4]}</p>
-                    <p>Details of Manufacturer : {prod[0][5]}</p>
-                    <p>Longitude of Manufature : {prod[0][6]}</p>
-                    <p>Latitude of Manufature : {prod[0][7]}</p>
-
-                    <p>Manufactured date : {prod[1][0]}</p>
-                    <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={() => handleClick(prod)}
-            >
-                Recieve
-            </Button>
-                    </div>
-                    
-                </>
-          ))) : <> </>} */}
-          </>
+          </div>
         )}
       </Navbar>
     </div>
