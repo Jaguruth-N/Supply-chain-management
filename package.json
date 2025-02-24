@@ -5,7 +5,9 @@
         "solc": "^0.8.4",
         "truffle": "^5.3.7"
     },
+
     "scripts": {
-        "copy-contracts": "xcopy /E /I /Y .\\contracts .\\client\\src\\contracts"
+      "copy-contracts": "xcopy /E /I /Y .\\contracts .\\client\\src\\contracts"
     }
 }
+  
