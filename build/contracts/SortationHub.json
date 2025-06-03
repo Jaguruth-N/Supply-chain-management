@@ -1,0 +1,2401 @@
+{
+  "contractName": "SortationHub",
+  "abi": [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "SortationHubAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "SortationHubRemoved",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "isSortationHub",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "addSortationHub",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "removeSortationHub",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"SortationHubAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"SortationHubRemoved\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"addSortationHub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"isSortationHub\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"removeSortationHub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"isSortationHub(address)\":{\"details\":\"SortationHub Utility functions.\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/rolesUtils[deprecated]/SortationHub.sol\":\"SortationHub\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/rolesUtils[deprecated]/Roles.sol\":{\"keccak256\":\"0x8feb18f8b8dbb5514506bfefb7f6b23dbe040745c0cf329698c273b25907761b\",\"urls\":[\"bzz-raw://3b8d1ad2c30f8cdea4ad34c5fa15e53e4d93e89ce0236b3f9312e8e616aea886\",\"dweb:/ipfs/QmUvfiTnWmpHXupecbSbeJbpPvA4ayRFfy1EPCWD9ynm6T\"]},\"project:/contracts/rolesUtils[deprecated]/SortationHub.sol\":{\"keccak256\":\"0x9b36f37af8b3aab6820106416d52ec9d6ecd6a1dec3f4f9678bed3ec18dcc250\",\"urls\":[\"bzz-raw://5d6343debba7f3b93aee5cfdbee7a327b9fa2aa58a8fa461adce60ae92163cc2\",\"dweb:/ipfs/QmNdSXBNr7NczyAeAqUaeGwfsEDAerx3K1SPArZqTeEANq\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061002933600061005960201b6101601790919060201c565b60405133907ff24b2b42933e0e5ea403c4c61c4acb4d2e78185563b0e7a2df41dab9af91690390600090a26100e3565b6001600160a01b03811661006c57600080fd5b61007f82826001600160e01b036100ae16565b1561008957600080fd5b6001600160a01b0316600090815260209190915260409020805460ff19166001179055565b60006001600160a01b0382166100c357600080fd5b506001600160a01b03166000908152602091909152604090205460ff1690565b61025e806100f26000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806313d1ca9b14610046578063b2d598fd1461006e578063bf455dc214610076575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b03166100b0565b005b61006c61010a565b61009c6004803603602081101561008c57600080fd5b50356001600160a01b0316610148565b604080519115158252519081900360200190f35b6100b933610148565b6100c257600080fd5b6100d360008263ffffffff61016016565b6040516001600160a01b038216907ff24b2b42933e0e5ea403c4c61c4acb4d2e78185563b0e7a2df41dab9af91690390600090a250565b61011b60003363ffffffff6101ac16565b60405133907ff9478998235c7916ffabc3a24b4baa4e00c2084e38ef18158d2fca78985a5feb90600090a2565b600061015a818363ffffffff6101f416565b92915050565b6001600160a01b03811661017357600080fd5b61017d82826101f4565b1561018757600080fd5b6001600160a01b0316600090815260209190915260409020805460ff19166001179055565b6001600160a01b0381166101bf57600080fd5b6101c982826101f4565b6101d257600080fd5b6001600160a01b0316600090815260209190915260409020805460ff19169055565b60006001600160a01b03821661020957600080fd5b506001600160a01b03166000908152602091909152604090205460ff169056fea265627a7a72315820cb31b7f0bf2669f782bbb0a111e7b1b9108497ddf13c09942d56dd6c7058426064736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806313d1ca9b14610046578063b2d598fd1461006e578063bf455dc214610076575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b03166100b0565b005b61006c61010a565b61009c6004803603602081101561008c57600080fd5b50356001600160a01b0316610148565b604080519115158252519081900360200190f35b6100b933610148565b6100c257600080fd5b6100d360008263ffffffff61016016565b6040516001600160a01b038216907ff24b2b42933e0e5ea403c4c61c4acb4d2e78185563b0e7a2df41dab9af91690390600090a250565b61011b60003363ffffffff6101ac16565b60405133907ff9478998235c7916ffabc3a24b4baa4e00c2084e38ef18158d2fca78985a5feb90600090a2565b600061015a818363ffffffff6101f416565b92915050565b6001600160a01b03811661017357600080fd5b61017d82826101f4565b1561018757600080fd5b6001600160a01b0316600090815260209190915260409020805460ff19166001179055565b6001600160a01b0381166101bf57600080fd5b6101c982826101f4565b6101d257600080fd5b6001600160a01b0316600090815260209190915260409020805460ff19169055565b60006001600160a01b03821661020957600080fd5b506001600160a01b03166000908152602091909152604090205460ff169056fea265627a7a72315820cb31b7f0bf2669f782bbb0a111e7b1b9108497ddf13c09942d56dd6c7058426064736f6c63430005100032",
+  "sourceMap": "63:1007:7:-;;;278:112;8:9:-1;5:2;;;30:1;27;20:12;5:2;278:112:7;306:37;332:10;306:17;:25;;;;;;:37;;;;:::i;:::-;355:29;;373:10;;355:29;;;;;63:1007;;671:192:6;-1:-1:-1;;;;;759:22:6;;751:31;;;;;;798:23;806:4;812:8;-1:-1:-1;;;;;798:7:6;:23;:::i;:::-;797:24;789:33;;;;;;-1:-1:-1;;;;;831:19:6;:9;:19;;;;;;;;;;;:26;;-1:-1:-1;;831:26:6;853:4;831:26;;;671:192::o;431:178::-;523:4;-1:-1:-1;;;;;547:22:6;;539:31;;;;;;-1:-1:-1;;;;;;584:19:6;:9;:19;;;;;;;;;;;;;;;431:178::o;63:1007:7:-;;;;;;;",
+  "deployedSourceMap": "63:1007:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;63:1007:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;735:154;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;735:154:7;-1:-1:-1;;;;;735:154:7;;:::i;:::-;;895:133;;;:::i;605:124::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;605:124:7;-1:-1:-1;;;;;605:124:7;;:::i;:::-;;;;;;;;;;;;;;;;;;735:154;478:26;493:10;478:14;:26::i;:::-;470:35;;;;;;809;:17;835:8;809:35;:25;:35;:::i;:::-;856:27;;-1:-1:-1;;;;;856:27:7;;;;;;;;735:154;:::o;895:133::-;939:40;:17;968:10;939:40;:28;:40;:::i;:::-;991:31;;1011:10;;991:31;;;;;895:133::o;605:124::-;668:4;688:35;668:4;714:8;688:35;:25;:35;:::i;:::-;681:42;605:124;-1:-1:-1;;605:124:7:o;671:192:6:-;-1:-1:-1;;;;;759:22:6;;751:31;;;;;;798:23;806:4;812:8;798:7;:23::i;:::-;797:24;789:33;;;;;;-1:-1:-1;;;;;831:19:6;:9;:19;;;;;;;;;;;:26;;-1:-1:-1;;831:26:6;853:4;831:26;;;671:192::o;930:195::-;-1:-1:-1;;;;;1021:22:6;;1013:31;;;;;;1059:23;1067:4;1073:8;1059:7;:23::i;:::-;1051:32;;;;;;-1:-1:-1;;;;;1092:19:6;1114:5;1092:19;;;;;;;;;;;:27;;-1:-1:-1;;1092:27:6;;;930:195::o;431:178::-;523:4;-1:-1:-1;;;;;547:22:6;;539:31;;;;;;-1:-1:-1;;;;;;584:19:6;:9;:19;;;;;;;;;;;;;;;431:178::o",
+  "source": "\r\npragma solidity >=0.4.21 <0.9.0;\r\n\r\nimport \"./Roles.sol\";\r\n\r\ncontract SortationHub {\r\n  using Roles for Roles.Role;\r\n\r\n  event SortationHubAdded(address indexed _account);\r\n  event SortationHubRemoved(address indexed _account);\r\n\r\n  Roles.Role private sortationHubsList;\r\n\r\n  constructor() public {\r\n    sortationHubsList.addRole(msg.sender);\r\n    emit SortationHubAdded(msg.sender);\r\n  }\r\n\r\n  ///@dev Modifiers for SortationHub.\r\n  modifier onlySortationHub() {\r\n    require(isSortationHub(msg.sender));\r\n    _;\r\n  }\r\n  /*-----------------------------*/\r\n\r\n  ///@dev SortationHub Utility functions.\r\n  function isSortationHub(address _account) public view returns (bool) {\r\n    return sortationHubsList.hasRole(_account);\r\n  }\r\n\r\n  function addSortationHub(address _account) public onlySortationHub {\r\n    sortationHubsList.addRole(_account);\r\n    emit SortationHubAdded(_account);\r\n  }\r\n\r\n  function removeSortationHub() public {\r\n    sortationHubsList.removeRole(msg.sender);\r\n    emit SortationHubRemoved(msg.sender);\r\n  }\r\n  /*-----------------------------*/\r\n\r\n}\r\n",
+  "sourcePath": "C:\\Users\\user\\Desktop\\eth-supplychain-dapp\\contracts\\rolesUtils[deprecated]\\SortationHub.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/rolesUtils[deprecated]/SortationHub.sol",
+    "exportedSymbols": {
+      "SortationHub": [
+        2143
+      ]
+    },
+    "id": 2144,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2054,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "2:32:7"
+      },
+      {
+        "absolutePath": "project:/contracts/rolesUtils[deprecated]/Roles.sol",
+        "file": "./Roles.sol",
+        "id": 2055,
+        "nodeType": "ImportDirective",
+        "scope": 2144,
+        "sourceUnit": 2053,
+        "src": "38:21:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2143,
+        "linearizedBaseContracts": [
+          2143
+        ],
+        "name": "SortationHub",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 2058,
+            "libraryName": {
+              "contractScope": null,
+              "id": 2056,
+              "name": "Roles",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2052,
+              "src": "96:5:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Roles_$2052",
+                "typeString": "library Roles"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "90:27:7",
+            "typeName": {
+              "contractScope": null,
+              "id": 2057,
+              "name": "Roles.Role",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1965,
+              "src": "106:10:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Role_$1965_storage_ptr",
+                "typeString": "struct Roles.Role"
+              }
+            }
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2062,
+            "name": "SortationHubAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2061,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2060,
+                  "indexed": true,
+                  "name": "_account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2062,
+                  "src": "147:24:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2059,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "147:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "146:26:7"
+            },
+            "src": "123:50:7"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2066,
+            "name": "SortationHubRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2065,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2064,
+                  "indexed": true,
+                  "name": "_account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2066,
+                  "src": "203:24:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2063,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "203:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "202:26:7"
+            },
+            "src": "177:52:7"
+          },
+          {
+            "constant": false,
+            "id": 2068,
+            "name": "sortationHubsList",
+            "nodeType": "VariableDeclaration",
+            "scope": 2143,
+            "src": "235:36:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Role_$1965_storage",
+              "typeString": "struct Roles.Role"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 2067,
+              "name": "Roles.Role",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1965,
+              "src": "235:10:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Role_$1965_storage_ptr",
+                "typeString": "struct Roles.Role"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 2083,
+              "nodeType": "Block",
+              "src": "299:91:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 2074,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2249,
+                          "src": "332:3:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 2075,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "332:10:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2071,
+                        "name": "sortationHubsList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2068,
+                        "src": "306:17:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Role_$1965_storage",
+                          "typeString": "struct Roles.Role storage ref"
+                        }
+                      },
+                      "id": 2073,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "addRole",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2020,
+                      "src": "306:25:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$1965_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$1965_storage_ptr_$",
+                        "typeString": "function (struct Roles.Role storage pointer,address)"
+                      }
+                    },
+                    "id": 2076,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "306:37:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2077,
+                  "nodeType": "ExpressionStatement",
+                  "src": "306:37:7"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 2079,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2249,
+                          "src": "373:3:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 2080,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "373:10:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 2078,
+                      "name": "SortationHubAdded",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2062,
+                      "src": "355:17:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 2081,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "355:29:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2082,
+                  "nodeType": "EmitStatement",
+                  "src": "350:34:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2084,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2069,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "289:2:7"
+            },
+            "returnParameters": {
+              "id": 2070,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "299:0:7"
+            },
+            "scope": 2143,
+            "src": "278:112:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 2094,
+              "nodeType": "Block",
+              "src": "463:56:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 2088,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 2249,
+                              "src": "493:3:7",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 2089,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": null,
+                            "src": "493:10:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          ],
+                          "id": 2087,
+                          "name": "isSortationHub",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2108,
+                          "src": "478:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address) view returns (bool)"
+                          }
+                        },
+                        "id": 2090,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "478:26:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 2086,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        2252,
+                        2253
+                      ],
+                      "referencedDeclaration": 2252,
+                      "src": "470:7:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 2091,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "470:35:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2092,
+                  "nodeType": "ExpressionStatement",
+                  "src": "470:35:7"
+                },
+                {
+                  "id": 2093,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "512:1:7"
+                }
+              ]
+            },
+            "documentation": "@dev Modifiers for SortationHub.",
+            "id": 2095,
+            "name": "onlySortationHub",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 2085,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "460:2:7"
+            },
+            "src": "435:84:7",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 2107,
+              "nodeType": "Block",
+              "src": "674:55:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2104,
+                        "name": "_account",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2097,
+                        "src": "714:8:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2102,
+                        "name": "sortationHubsList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2068,
+                        "src": "688:17:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Role_$1965_storage",
+                          "typeString": "struct Roles.Role storage ref"
+                        }
+                      },
+                      "id": 2103,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "hasRole",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1988,
+                      "src": "688:25:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_struct$_Role_$1965_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_Role_$1965_storage_ptr_$",
+                        "typeString": "function (struct Roles.Role storage pointer,address) view returns (bool)"
+                      }
+                    },
+                    "id": 2105,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "688:35:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 2101,
+                  "id": 2106,
+                  "nodeType": "Return",
+                  "src": "681:42:7"
+                }
+              ]
+            },
+            "documentation": "@dev SortationHub Utility functions.",
+            "id": 2108,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isSortationHub",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2098,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2097,
+                  "name": "_account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2108,
+                  "src": "629:16:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2096,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "629:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "628:18:7"
+            },
+            "returnParameters": {
+              "id": 2101,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2100,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2108,
+                  "src": "668:4:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2099,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "668:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "667:6:7"
+            },
+            "scope": 2143,
+            "src": "605:124:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 2125,
+              "nodeType": "Block",
+              "src": "802:87:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2118,
+                        "name": "_account",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2110,
+                        "src": "835:8:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2115,
+                        "name": "sortationHubsList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2068,
+                        "src": "809:17:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Role_$1965_storage",
+                          "typeString": "struct Roles.Role storage ref"
+                        }
+                      },
+                      "id": 2117,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "addRole",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2020,
+                      "src": "809:25:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$1965_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$1965_storage_ptr_$",
+                        "typeString": "function (struct Roles.Role storage pointer,address)"
+                      }
+                    },
+                    "id": 2119,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "809:35:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2120,
+                  "nodeType": "ExpressionStatement",
+                  "src": "809:35:7"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2122,
+                        "name": "_account",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2110,
+                        "src": "874:8:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 2121,
+                      "name": "SortationHubAdded",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2062,
+                      "src": "856:17:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 2123,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "856:27:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2124,
+                  "nodeType": "EmitStatement",
+                  "src": "851:32:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2126,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 2113,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 2112,
+                  "name": "onlySortationHub",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 2095,
+                  "src": "785:16:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "785:16:7"
+              }
+            ],
+            "name": "addSortationHub",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2111,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2110,
+                  "name": "_account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2126,
+                  "src": "760:16:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2109,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "760:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "759:18:7"
+            },
+            "returnParameters": {
+              "id": 2114,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "802:0:7"
+            },
+            "scope": 2143,
+            "src": "735:154:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 2141,
+              "nodeType": "Block",
+              "src": "932:96:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 2132,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2249,
+                          "src": "968:3:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 2133,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "968:10:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2129,
+                        "name": "sortationHubsList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2068,
+                        "src": "939:17:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Role_$1965_storage",
+                          "typeString": "struct Roles.Role storage ref"
+                        }
+                      },
+                      "id": 2131,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "removeRole",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2051,
+                      "src": "939:28:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Role_$1965_storage_ptr_$_t_address_$returns$__$bound_to$_t_struct$_Role_$1965_storage_ptr_$",
+                        "typeString": "function (struct Roles.Role storage pointer,address)"
+                      }
+                    },
+                    "id": 2134,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "939:40:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2135,
+                  "nodeType": "ExpressionStatement",
+                  "src": "939:40:7"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 2137,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2249,
+                          "src": "1011:3:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 2138,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1011:10:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 2136,
+                      "name": "SortationHubRemoved",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2066,
+                      "src": "991:19:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 2139,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "991:31:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 2140,
+                  "nodeType": "EmitStatement",
+                  "src": "986:36:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 2142,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeSortationHub",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2127,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "922:2:7"
+            },
+            "returnParameters": {
+              "id": 2128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "932:0:7"
+            },
+            "scope": 2143,
+            "src": "895:133:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2144,
+        "src": "63:1007:7"
+      }
+    ],
+    "src": "2:1070:7"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/rolesUtils[deprecated]/SortationHub.sol",
+      "exportedSymbols": {
+        "SortationHub": [
+          2143
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.4",
+            ".21",
+            "<",
+            "0.9",
+            ".0"
+          ]
+        },
+        "id": 2054,
+        "name": "PragmaDirective",
+        "src": "2:32:7"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2053,
+          "absolutePath": "project:/contracts/rolesUtils[deprecated]/Roles.sol",
+          "file": "./Roles.sol",
+          "scope": 2144,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 2055,
+        "name": "ImportDirective",
+        "src": "38:21:7"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            2143
+          ],
+          "name": "SortationHub",
+          "scope": 2144
+        },
+        "children": [
+          {
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "Roles",
+                  "referencedDeclaration": 2052,
+                  "type": "library Roles"
+                },
+                "id": 2056,
+                "name": "UserDefinedTypeName",
+                "src": "96:5:7"
+              },
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "Roles.Role",
+                  "referencedDeclaration": 1965,
+                  "type": "struct Roles.Role"
+                },
+                "id": 2057,
+                "name": "UserDefinedTypeName",
+                "src": "106:10:7"
+              }
+            ],
+            "id": 2058,
+            "name": "UsingForDirective",
+            "src": "90:27:7"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "documentation": null,
+              "name": "SortationHubAdded"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "_account",
+                      "scope": 2062,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 2059,
+                        "name": "ElementaryTypeName",
+                        "src": "147:7:7"
+                      }
+                    ],
+                    "id": 2060,
+                    "name": "VariableDeclaration",
+                    "src": "147:24:7"
+                  }
+                ],
+                "id": 2061,
+                "name": "ParameterList",
+                "src": "146:26:7"
+              }
+            ],
+            "id": 2062,
+            "name": "EventDefinition",
+            "src": "123:50:7"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "documentation": null,
+              "name": "SortationHubRemoved"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "_account",
+                      "scope": 2066,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 2063,
+                        "name": "ElementaryTypeName",
+                        "src": "203:7:7"
+                      }
+                    ],
+                    "id": 2064,
+                    "name": "VariableDeclaration",
+                    "src": "203:24:7"
+                  }
+                ],
+                "id": 2065,
+                "name": "ParameterList",
+                "src": "202:26:7"
+              }
+            ],
+            "id": 2066,
+            "name": "EventDefinition",
+            "src": "177:52:7"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "sortationHubsList",
+              "scope": 2143,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "struct Roles.Role",
+              "value": null,
+              "visibility": "private"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "Roles.Role",
+                  "referencedDeclaration": 1965,
+                  "type": "struct Roles.Role"
+                },
+                "id": 2067,
+                "name": "UserDefinedTypeName",
+                "src": "235:10:7"
+              }
+            ],
+            "id": 2068,
+            "name": "VariableDeclaration",
+            "src": "235:36:7"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 2143,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2069,
+                "name": "ParameterList",
+                "src": "289:2:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2070,
+                "name": "ParameterList",
+                "src": "299:0:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "addRole",
+                              "referencedDeclaration": 2020,
+                              "type": "function (struct Roles.Role storage pointer,address)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2068,
+                                  "type": "struct Roles.Role storage ref",
+                                  "value": "sortationHubsList"
+                                },
+                                "id": 2071,
+                                "name": "Identifier",
+                                "src": "306:17:7"
+                              }
+                            ],
+                            "id": 2073,
+                            "name": "MemberAccess",
+                            "src": "306:25:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2249,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 2074,
+                                "name": "Identifier",
+                                "src": "332:3:7"
+                              }
+                            ],
+                            "id": 2075,
+                            "name": "MemberAccess",
+                            "src": "332:10:7"
+                          }
+                        ],
+                        "id": 2076,
+                        "name": "FunctionCall",
+                        "src": "306:37:7"
+                      }
+                    ],
+                    "id": 2077,
+                    "name": "ExpressionStatement",
+                    "src": "306:37:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2062,
+                              "type": "function (address)",
+                              "value": "SortationHubAdded"
+                            },
+                            "id": 2078,
+                            "name": "Identifier",
+                            "src": "355:17:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2249,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 2079,
+                                "name": "Identifier",
+                                "src": "373:3:7"
+                              }
+                            ],
+                            "id": 2080,
+                            "name": "MemberAccess",
+                            "src": "373:10:7"
+                          }
+                        ],
+                        "id": 2081,
+                        "name": "FunctionCall",
+                        "src": "355:29:7"
+                      }
+                    ],
+                    "id": 2082,
+                    "name": "EmitStatement",
+                    "src": "350:34:7"
+                  }
+                ],
+                "id": 2083,
+                "name": "Block",
+                "src": "299:91:7"
+              }
+            ],
+            "id": 2084,
+            "name": "FunctionDefinition",
+            "src": "278:112:7"
+          },
+          {
+            "attributes": {
+              "documentation": "@dev Modifiers for SortationHub.",
+              "name": "onlySortationHub",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2085,
+                "name": "ParameterList",
+                "src": "460:2:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                2252,
+                                2253
+                              ],
+                              "referencedDeclaration": 2252,
+                              "type": "function (bool) pure",
+                              "value": "require"
+                            },
+                            "id": 2086,
+                            "name": "Identifier",
+                            "src": "470:7:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "bool",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address_payable",
+                                      "typeString": "address payable"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2108,
+                                  "type": "function (address) view returns (bool)",
+                                  "value": "isSortationHub"
+                                },
+                                "id": 2087,
+                                "name": "Identifier",
+                                "src": "478:14:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "sender",
+                                  "referencedDeclaration": null,
+                                  "type": "address payable"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 2249,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 2088,
+                                    "name": "Identifier",
+                                    "src": "493:3:7"
+                                  }
+                                ],
+                                "id": 2089,
+                                "name": "MemberAccess",
+                                "src": "493:10:7"
+                              }
+                            ],
+                            "id": 2090,
+                            "name": "FunctionCall",
+                            "src": "478:26:7"
+                          }
+                        ],
+                        "id": 2091,
+                        "name": "FunctionCall",
+                        "src": "470:35:7"
+                      }
+                    ],
+                    "id": 2092,
+                    "name": "ExpressionStatement",
+                    "src": "470:35:7"
+                  },
+                  {
+                    "id": 2093,
+                    "name": "PlaceholderStatement",
+                    "src": "512:1:7"
+                  }
+                ],
+                "id": 2094,
+                "name": "Block",
+                "src": "463:56:7"
+              }
+            ],
+            "id": 2095,
+            "name": "ModifierDefinition",
+            "src": "435:84:7"
+          },
+          {
+            "attributes": {
+              "documentation": "@dev SortationHub Utility functions.",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "isSortationHub",
+              "scope": 2143,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_account",
+                      "scope": 2108,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 2096,
+                        "name": "ElementaryTypeName",
+                        "src": "629:7:7"
+                      }
+                    ],
+                    "id": 2097,
+                    "name": "VariableDeclaration",
+                    "src": "629:16:7"
+                  }
+                ],
+                "id": 2098,
+                "name": "ParameterList",
+                "src": "628:18:7"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 2108,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 2099,
+                        "name": "ElementaryTypeName",
+                        "src": "668:4:7"
+                      }
+                    ],
+                    "id": 2100,
+                    "name": "VariableDeclaration",
+                    "src": "668:4:7"
+                  }
+                ],
+                "id": 2101,
+                "name": "ParameterList",
+                "src": "667:6:7"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 2101
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "bool",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "hasRole",
+                              "referencedDeclaration": 1988,
+                              "type": "function (struct Roles.Role storage pointer,address) view returns (bool)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2068,
+                                  "type": "struct Roles.Role storage ref",
+                                  "value": "sortationHubsList"
+                                },
+                                "id": 2102,
+                                "name": "Identifier",
+                                "src": "688:17:7"
+                              }
+                            ],
+                            "id": 2103,
+                            "name": "MemberAccess",
+                            "src": "688:25:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2097,
+                              "type": "address",
+                              "value": "_account"
+                            },
+                            "id": 2104,
+                            "name": "Identifier",
+                            "src": "714:8:7"
+                          }
+                        ],
+                        "id": 2105,
+                        "name": "FunctionCall",
+                        "src": "688:35:7"
+                      }
+                    ],
+                    "id": 2106,
+                    "name": "Return",
+                    "src": "681:42:7"
+                  }
+                ],
+                "id": 2107,
+                "name": "Block",
+                "src": "674:55:7"
+              }
+            ],
+            "id": 2108,
+            "name": "FunctionDefinition",
+            "src": "605:124:7"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "name": "addSortationHub",
+              "scope": 2143,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_account",
+                      "scope": 2126,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 2109,
+                        "name": "ElementaryTypeName",
+                        "src": "760:7:7"
+                      }
+                    ],
+                    "id": 2110,
+                    "name": "VariableDeclaration",
+                    "src": "760:16:7"
+                  }
+                ],
+                "id": 2111,
+                "name": "ParameterList",
+                "src": "759:18:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2114,
+                "name": "ParameterList",
+                "src": "802:0:7"
+              },
+              {
+                "attributes": {
+                  "arguments": null
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 2095,
+                      "type": "modifier ()",
+                      "value": "onlySortationHub"
+                    },
+                    "id": 2112,
+                    "name": "Identifier",
+                    "src": "785:16:7"
+                  }
+                ],
+                "id": 2113,
+                "name": "ModifierInvocation",
+                "src": "785:16:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "addRole",
+                              "referencedDeclaration": 2020,
+                              "type": "function (struct Roles.Role storage pointer,address)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2068,
+                                  "type": "struct Roles.Role storage ref",
+                                  "value": "sortationHubsList"
+                                },
+                                "id": 2115,
+                                "name": "Identifier",
+                                "src": "809:17:7"
+                              }
+                            ],
+                            "id": 2117,
+                            "name": "MemberAccess",
+                            "src": "809:25:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2110,
+                              "type": "address",
+                              "value": "_account"
+                            },
+                            "id": 2118,
+                            "name": "Identifier",
+                            "src": "835:8:7"
+                          }
+                        ],
+                        "id": 2119,
+                        "name": "FunctionCall",
+                        "src": "809:35:7"
+                      }
+                    ],
+                    "id": 2120,
+                    "name": "ExpressionStatement",
+                    "src": "809:35:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2062,
+                              "type": "function (address)",
+                              "value": "SortationHubAdded"
+                            },
+                            "id": 2121,
+                            "name": "Identifier",
+                            "src": "856:17:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2110,
+                              "type": "address",
+                              "value": "_account"
+                            },
+                            "id": 2122,
+                            "name": "Identifier",
+                            "src": "874:8:7"
+                          }
+                        ],
+                        "id": 2123,
+                        "name": "FunctionCall",
+                        "src": "856:27:7"
+                      }
+                    ],
+                    "id": 2124,
+                    "name": "EmitStatement",
+                    "src": "851:32:7"
+                  }
+                ],
+                "id": 2125,
+                "name": "Block",
+                "src": "802:87:7"
+              }
+            ],
+            "id": 2126,
+            "name": "FunctionDefinition",
+            "src": "735:154:7"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "removeSortationHub",
+              "scope": 2143,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2127,
+                "name": "ParameterList",
+                "src": "922:2:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2128,
+                "name": "ParameterList",
+                "src": "932:0:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "removeRole",
+                              "referencedDeclaration": 2051,
+                              "type": "function (struct Roles.Role storage pointer,address)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2068,
+                                  "type": "struct Roles.Role storage ref",
+                                  "value": "sortationHubsList"
+                                },
+                                "id": 2129,
+                                "name": "Identifier",
+                                "src": "939:17:7"
+                              }
+                            ],
+                            "id": 2131,
+                            "name": "MemberAccess",
+                            "src": "939:28:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2249,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 2132,
+                                "name": "Identifier",
+                                "src": "968:3:7"
+                              }
+                            ],
+                            "id": 2133,
+                            "name": "MemberAccess",
+                            "src": "968:10:7"
+                          }
+                        ],
+                        "id": 2134,
+                        "name": "FunctionCall",
+                        "src": "939:40:7"
+                      }
+                    ],
+                    "id": 2135,
+                    "name": "ExpressionStatement",
+                    "src": "939:40:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2066,
+                              "type": "function (address)",
+                              "value": "SortationHubRemoved"
+                            },
+                            "id": 2136,
+                            "name": "Identifier",
+                            "src": "991:19:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2249,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 2137,
+                                "name": "Identifier",
+                                "src": "1011:3:7"
+                              }
+                            ],
+                            "id": 2138,
+                            "name": "MemberAccess",
+                            "src": "1011:10:7"
+                          }
+                        ],
+                        "id": 2139,
+                        "name": "FunctionCall",
+                        "src": "991:31:7"
+                      }
+                    ],
+                    "id": 2140,
+                    "name": "EmitStatement",
+                    "src": "986:36:7"
+                  }
+                ],
+                "id": 2141,
+                "name": "Block",
+                "src": "932:96:7"
+              }
+            ],
+            "id": 2142,
+            "name": "FunctionDefinition",
+            "src": "895:133:7"
+          }
+        ],
+        "id": 2143,
+        "name": "ContractDefinition",
+        "src": "63:1007:7"
+      }
+    ],
+    "id": 2144,
+    "name": "SourceUnit",
+    "src": "2:1070:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2025-04-11T19:35:20.491Z",
+  "devdoc": {
+    "methods": {
+      "isSortationHub(address)": {
+        "details": "SortationHub Utility functions."
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

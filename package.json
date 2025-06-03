@@ -1,13 +1,24 @@
 {
-    "name": "eth-supplychain-dapp",
-    "version": "0.1.0",
-    "dependencies": {
-        "solc": "^0.8.4",
-        "truffle": "^5.3.7"
-    },
-
-    "scripts": {
-      "copy-contracts": "xcopy /E /I /Y .\\contracts .\\client\\src\\contracts"
-    }
+  "name": "eth-supplychain-dapp",
+  "version": "1.0.0",
+  "description": "Ethereum Supply Chain DApp",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "test:coverage": "truffle run coverage"
+  },
+  "dependencies": {
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "@truffle/hdwallet-provider": "^2.1.7",
+    "leaflet": "^1.7.1",
+    "react-leaflet": "^3.2.5",
+    "solidity-coverage": "^0.8.4",
+    "truffle": "^5.8.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6"
+  }
 }
-  

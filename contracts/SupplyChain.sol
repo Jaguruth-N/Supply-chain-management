@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21 <0.9.0;
 
 import "./Structure.sol";
@@ -270,9 +269,11 @@ contract SupplyChain {
     ///@dev STEP 5 : Purchase of a product at third party by Customer.
     function purchaseByCustomer(uint256 _uid)
         public
+        payable
         receivedByThirdParty(_uid)
     {
         require(hasCustomerRole(msg.sender));
+        require(msg.value == 1 ether, "Must send exactly 1 ETH");
         products[_uid].customer = msg.sender;
         products[_uid].productState = Structure.State.PurchasedByCustomer;
         productHistory[_uid].history.push(products[_uid]);

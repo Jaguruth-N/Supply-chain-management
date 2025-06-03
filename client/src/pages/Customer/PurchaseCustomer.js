@@ -1,4 +1,6 @@
 import React from "react";
+import Web3 from "web3";
+
 import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import { useRole } from "../../context/RoleDataContext";
@@ -84,16 +86,28 @@ export default function PurchaseCustomer(props) {
     setOpen(true);
   };
 
+  // const handleBuyButton = async (id) => {
+  //   await supplyChainContract.methods
+  //     .purchaseByCustomer(id)
+  //     .send({ from: roles.customer, gas: 1000000 })
+  //     .on("transactionHash", function (hash) {
+  //       handleSetTxhash(id, hash);
+  //     });
+  //   setCount(0);
+  // };
   const handleBuyButton = async (id) => {
     await supplyChainContract.methods
       .purchaseByCustomer(id)
-      .send({ from: roles.customer, gas: 1000000 })
+      .send({
+        from: roles.customer,
+        gas: 1000000,
+        value: Web3.utils.toWei("1", "ether") // 👈 ADD THIS LINE
+      })
       .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
       });
     setCount(0);
   };
-
   const handleSetTxhash = async (id, hash) => {
     await supplyChainContract.methods
       .setTransactionHash(id, hash)

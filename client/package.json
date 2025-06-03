@@ -10,8 +10,10 @@
     "ganache-cli": "^6.12.2",
     "ganache-core": "^2.13.2",
     "google-maps-react": "^2.0.6",
+    "leaflet": "^1.7.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-leaflet": "^3.2.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.2.0",
     "web3": "1.2.2"
